@@ -1,0 +1,23 @@
+from ftplib import parse150
+from math import factorial
+from decimal import Decimal, getcontext
+
+getcontext().prec=1000
+
+pi_input = input('How many digits of pi would you like?')
+p = int(pi_input)
+
+def cal(p):
+    n= Decimal(0)
+    pi = Decimal(0)
+    num= Decimal(0)
+
+    for i in range(p):
+        n = ((-1)**i)*(factorial(6*i))*(13591409+545140134*i)
+        num = factorial(3*i)*(factorial(i)**3)*(640320**(3*i))
+        pi += Decimal(n)/Decimal(num)
+    pi = pi * Decimal(12) / Decimal(640320 ** Decimal(1.5))
+    pi = 1/pi
+    return round(pi,p)
+
+print(cal(p))
